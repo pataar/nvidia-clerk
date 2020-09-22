@@ -66,9 +66,10 @@ func main() {
 	useDiscord := flag.Bool("discord", false, "Enable Discord webhook notifications for whenever SKU is in stock.")
 	useTelegram := flag.Bool("telegram", false, "Enable Telegram webhook notifications for whenever SKU is in stock.")
 	useTest := flag.Bool("test", false, "Enable testing mode")
+    delay := flag.Int("delay", 60001, "Delay between inventory refreshes in ms")
 	flag.Parse()
 
-	config, configErr := config.GetConfig(region, *useSms, *useDiscord, *useTwitter, *useTelegram)
+	config, configErr := config.GetConfig(region, *useSms, *useDiscord, *useTwitter, *useTelegram, *delay)
 	if configErr != nil {
 		log.Fatal(configErr)
 	}
@@ -162,5 +163,7 @@ func main() {
 			// Exit clean after a SKU was added to checkout cart.
 			os.Exit(0)
 		}
+
+        time.Sleep(time.Duration(config.Delay) * time.Millisecond)
 	}
 }

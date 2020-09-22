@@ -46,6 +46,7 @@ type Config struct {
 	TwitterConfig  TwitterConfig
 	DiscordConfig  DiscordConfig
 	TelegramConfig TelegramConfig
+    Delay          int
 }
 
 // Hardcoded SKU to locale/currency mappings to avoid user pain of having to lookup and enter these.
@@ -272,7 +273,7 @@ func GetTelegramConfig() TelegramConfig {
 }
 
 //GetConfig Generates Configuration for application from environmental variables.
-func GetConfig(region string, smsEnabled bool, discordEnabled bool, twitterEnabled bool, telegramEnabled bool) (*Config, error) {
+func GetConfig(region string, smsEnabled bool, discordEnabled bool, twitterEnabled bool, telegramEnabled bool, delay int) (*Config, error) {
 	if regionConfig, ok := regionalConfig[region]; ok {
 		configuration := Config{}
 
@@ -280,6 +281,7 @@ func GetConfig(region string, smsEnabled bool, discordEnabled bool, twitterEnabl
 		configuration.TestSKU = regionConfig.TestSKU
 		configuration.Locale = regionConfig.Locale
 		configuration.Currency = regionConfig.Currency
+        configuration.Delay = delay
 
 		if smsEnabled == true {
 			configuration.TwilioConfig = GetTwilioConfig()
