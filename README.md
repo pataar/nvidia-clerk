@@ -1,7 +1,7 @@
 # nvidia-clerk
 
 This project was written in response to the recent NVIDIA RTX 3080 release debacle. During the launch multiple different groups of scalpers used
-closed source "bots" to procure large quantities of NVIDIA GPU's and most consumers were left without being able to purchase the product. This 
+closed source "bots" to procure large quantities of NVIDIA GPU's and most consumers were left without being able to purchase the product. This
 project will provide a short term solution so that customers can ensure they can buy a GPU and compete with these scalpers.
 
 NVIDIA Clerk doesn't actually purchase products for customers, it simply tracks the avaliable inventory from NVIDIAs APIs and automatically adds a GPU
@@ -81,6 +81,13 @@ Testing is currenly only supported for the USA region but it should show you wha
 
 
 # Advanced Usage
+
+## Delay
+You can configure the delay between refreshes of the inventory status using the
+delay-parameter. The default value is just over one minute. Value is in
+milliseconds.
+
+e.g. `-delay=60000``
 
 ## SMS Notifications
 
