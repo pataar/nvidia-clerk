@@ -39,7 +39,7 @@ func runTest(name string, client *http.Client, config config.Config) {
 			fmt.Printf("Error testing Twitter notification exiting...\n")
 			os.Exit(1)
 		} else {
-			fmt.Printf("Twitter Notification testing completed succesfully")
+			fmt.Printf("Twitter Notification testing completed succesfully\n")
 		}
 	case "telegram":
 		telegramErr := alert.SendTelegramMessage(config.SKU, config.TelegramConfig, client)
@@ -47,7 +47,7 @@ func runTest(name string, client *http.Client, config config.Config) {
 			fmt.Printf("Error testing Telegram notification exiting...\n")
 			os.Exit(1)
 		} else {
-			fmt.Printf("Telegram Notification testing completed succesfully")
+			fmt.Printf("Telegram Notification testing completed succesfully\n")
 		}
 	default:
 
@@ -60,13 +60,13 @@ func main() {
 	var region string
 
 	// Parse Argument Flags
-	flag.StringVar(&region, "region", "USA", "3 Letter region code")
+	flag.StringVar(&region, "region", "USA", "3 Letter region code.")
 	useTwitter := flag.Bool("twitter", false, "Enable Twitter Posts for whenever SKU is in stock.")
 	useSms := flag.Bool("sms", false, "Enable SMS notifications for whenever SKU is in stock.")
 	useDiscord := flag.Bool("discord", false, "Enable Discord webhook notifications for whenever SKU is in stock.")
 	useTelegram := flag.Bool("telegram", false, "Enable Telegram webhook notifications for whenever SKU is in stock.")
-	useTest := flag.Bool("test", false, "Enable testing mode")
-    delay := flag.Int("delay", 60001, "Delay between inventory refreshes in ms")
+	useTest := flag.Bool("test", false, "Enable testing mode.")
+	delay := flag.Int("delay", 60001, "Delay between inventory refreshes in ms.")
 	flag.Parse()
 
 	config, configErr := config.GetConfig(region, *useSms, *useDiscord, *useTwitter, *useTelegram, *delay)
@@ -164,6 +164,6 @@ func main() {
 			os.Exit(0)
 		}
 
-        time.Sleep(time.Duration(config.Delay) * time.Millisecond)
+       		time.Sleep(time.Duration(config.Delay) * time.Millisecond)
 	}
 }
